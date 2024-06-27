@@ -12,9 +12,9 @@ bits 64
 section .data
 section	.text
 
-global	ft_strcpy
+global	ft_strlen
 
-ft_strcpy:
+ft_strlen:
     push	rbp
     mov		rbp, rsp
 
