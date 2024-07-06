@@ -16,6 +16,17 @@ check_base:
         je      .error
         cmp     byte [rsi + rcx], 45
         je      .error
+        cmp     byte [rsi + rcx], 9
+        je      .error
+        cmp     byte [rsi + rcx], 10
+        je      .error
+        cmp     byte [rsi + rcx], 11
+        je      .error
+        cmp     byte [rsi + rcx], 12
+        je      .error
+        cmp     byte [rsi + rcx], 13
+        je      .error
+
         mov     r8, rcx
         .loop2:
             inc     r8

@@ -12,18 +12,20 @@ global      ft_strdup
 
 ft_strdup:
     push	rbp
+    push    r12
     mov		rbp, rsp
 
     call    ft_strlen
     inc     rax
-    mov     r8, rdi
+    mov     r12, rdi
     mov     rdi, rax
-    call    malloc
+    call    malloc wrt ..plt
     or      rax, rax
     js      .error
-    mov     rsi, r8
+    mov     rsi, r12
     mov     rdi, rax
     call    ft_strcpy
+    pop     r12
     pop     rbp
     ret
 
@@ -31,6 +33,7 @@ ft_strdup:
         neg     rax
         mov     rdx, rax
         call    __errno_location
+        pop     r12
         pop     rbp
         xor     rax, rax
         ret

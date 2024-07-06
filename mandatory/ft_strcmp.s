@@ -7,23 +7,29 @@ global	ft_strcmp
 
 ft_strcmp:
     push	rbp
+	push	rcx
+	push	rdi
     mov		rbp, rsp
 
 	xor		rcx, rcx
     xor     r8, r8
+	xor		rax, rax
 
 	loop:
-		mov		al, [rsi + rcx]
-		cmp		[rdi + rcx], al
+		mov		rax, [rsi + rcx]
+		cmp		byte [rdi + rcx], al
         jne     end
-		inc		rcx
 		cmp		al, byte 0
 		je		end
+		inc		rcx
 		jmp		loop
 
 	end:
-        mov     r8b, [rdi + rcx]
-		sub     r8b, al
-        mov     rax, r8
+        mov     r8, [rdi + rcx]
+		sub     r8, rax
+		xor		rax, rax
+        mov     eax, r8d
+		pop		rdi
+		pop		rcx
 		pop		rbp
 		ret

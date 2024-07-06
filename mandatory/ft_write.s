@@ -17,7 +17,7 @@ ft_write:
     .error:
         neg rax
         mov rdx, rax
-        call __errno_location
+        call [rel __errno_location wrt ..got]
         mov [rax], rdx
         mov rax, -1
         ret
