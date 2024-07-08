@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "assert.h": "c",
+        "malloc.h": "c",
+        "algorithm": "c"
     }
 }

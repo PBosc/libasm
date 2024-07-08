@@ -9,6 +9,8 @@ global	ft_atoi_base
 
 check_base:
     xor     rcx, rcx
+    cmp     rsi, 0
+    je      .error
     .loop:
         cmp     byte [rsi + rcx], 0
         je      .end
@@ -25,6 +27,8 @@ check_base:
         cmp     byte [rsi + rcx], 12
         je      .error
         cmp     byte [rsi + rcx], 13
+        je      .error
+        cmp     byte [rsi + rcx], 32
         je      .error
 
         mov     r8, rcx
@@ -112,6 +116,8 @@ ft_atoi_base:
     mov		r12, 1
     xor     rcx, rcx
     xor     rax, rax
+    cmp     rdi, 0
+    je      .error
     call    check_base
     cmp     rax, 2
     jl     .error

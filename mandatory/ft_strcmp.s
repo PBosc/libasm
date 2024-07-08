@@ -25,8 +25,11 @@ ft_strcmp:
 		jmp		loop
 
 	end:
-        mov     r8, [rdi + rcx]
-		sub     r8, rax
+		xor		r8, r8
+        mov     r8b, [rdi + rcx]
+		xor		r9, r9
+		mov		r9b, al
+		sub     r8d, r9d
 		xor		rax, rax
         mov     eax, r8d
 		pop		rdi

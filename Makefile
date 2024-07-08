@@ -1,4 +1,4 @@
-SRCS = $(addprefix mandatory/, ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup.s ft_atoi_base.s ft_list_push_front.s ft_list_size.s ft_list_sort.s)
+SRCS = $(addprefix mandatory/, ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup.s ft_atoi_base.s ft_list_push_front.s ft_list_size.s ft_list_sort.s ft_list_remove_if.s)
 # BSRCS = $(addprefix bonus/, ft_strchr.s)
 OBJS = $(SRCS:.s=.o)
 BOBJS = $(BSRCS:.s=.o) 
@@ -14,15 +14,25 @@ libasm.a: $(OBJS)
 bonus: all
 
 test: re libasm.a
-	@g++ -c main.cpp -o main.o
-	@g++ main.o -L. -lasm -o testmain -no-pie
-	@./testmain
+	@cc -c main.c -o main.o
+	@cc main.o -L. -lasm -o test
+	@./test
+	@rm *test*
+
+verbose_test: re libasm.a
+	@cc -c main_verbose.c -o main_verbose.o
+	@cc main_verbose.o -L. -lasm -o test
+	@./test -v
+	@rm *test*
+	@rm -f readonly.txt
 
 clean:
-	@rm -rf $(OBJS) main.o
+	@rm -rf $(OBJS) main.o main_verbose.o
 
 fclean: clean
-	@rm -rf libasm.a testmain
+	@rm -rf libasm.a *test*
+	@rm -f readonly.txt
+	@rm -f *test*
 
 re: fclean all
 
