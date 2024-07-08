@@ -29,7 +29,7 @@ verbose_test: re bonus
 	@make fclean
 
 clean:
-	@rm -rf $(OBJS) main.o main_verbose.o
+	@rm -rf $(OBJS) $(BOBJS) main.o main_verbose.o
 
 fclean: clean
 	@rm -rf libasm.a *test*
