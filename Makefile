@@ -1,6 +1,7 @@
-SRCS = $(addprefix mandatory/, ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup.s ft_atoi_base.s ft_list_push_front.s ft_list_size.s ft_list_sort.s ft_list_remove_if.s)
+SRCS = $(addprefix mandatory/, ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup.s)
 # BSRCS = $(addprefix bonus/, ft_strchr.s)
 OBJS = $(SRCS:.s=.o)
+BSRCS = $(addprefix bonus/, ft_list_remove_if.s ft_list_sort.s ft_atoi_base.s ft_list_size.s ft_list_push_front.s)
 BOBJS = $(BSRCS:.s=.o)
 all: libasm.a
 
@@ -10,20 +11,22 @@ libasm.a: $(OBJS)
 %.o: %.s
 	@nasm -f elf64 $< -o $@
 
-bonus: all
+bonus: $(BOBJS) $(OBJS)
+	@ar rcs libasm.a $^
 
-test: re libasm.a
+test: re bonus
+	@mkdir tmp
 	@cc -c main.c -o main.o
 	@cc -fsanitize=address -g main.o -L. -lasm -o test
 	@./test
-	@rm *test*
+	@make fclean
 
-verbose_test: re libasm.a
+verbose_test: re bonus
+	@mkdir tmp
 	@cc -c main_verbose.c -o main_verbose.o
 	@cc -fsanitize=address -g main_verbose.o -L. -lasm -o test
-	@./test -v
-	@rm *test*
-	@rm -f readonly.txt
+	@./test
+	@make fclean
 
 clean:
 	@rm -rf $(OBJS) main.o main_verbose.o
@@ -32,6 +35,7 @@ fclean: clean
 	@rm -rf libasm.a *test*
 	@rm -f readonly.txt
 	@rm -f *test*
+	@rm -rf tmp
 
 re: fclean all
 
