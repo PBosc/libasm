@@ -1,5 +1,4 @@
 SRCS = $(addprefix mandatory/, ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup.s)
-# BSRCS = $(addprefix bonus/, ft_strchr.s)
 OBJS = $(SRCS:.s=.o)
 BSRCS = $(addprefix bonus/, ft_list_remove_if.s ft_list_sort.s ft_atoi_base.s ft_list_size.s ft_list_push_front.s)
 BOBJS = $(BSRCS:.s=.o)
